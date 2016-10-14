@@ -1,10 +1,12 @@
-# Reveal_ObfuscatedVBScriptTrojan
+# Reveal Obfuscated VBScript Trojan
 <br><br>
-<u>VBScript File</u>
+<u>VBScript File</u><br>
+This file Take an array
 
-<u>First EXE file</u>
-	1. Download encrypted PE
-	2. Decrypt with the key: v\x00F\x00m\x000\x00M\x00B\x00p\x00v
-	3. Execute
 
-<u>Second EXE file - Actual trojan</u>
+<u>First EXE file</u><br>
+	1. Load encrypted PE from resources<br>
+	2. Decrypt<br>
+	3. Execute<br>
+
+<u>Second EXE file - Actual trojan</u><br>
