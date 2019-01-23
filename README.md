@@ -1,12 +1,6 @@
 # Reveal Obfuscated VBScript Trojan
-<br><br>
-<u>VBScript File</u><br>
-This file Take an array
+I found this virus in a known website on the internet. Because lots of people could have been in a high risk and there was just one anti-maleware (before I started the reaserch) which alert from that virus I decided to reverse it and publish what it does.
 
+The maleware has two stages of obfuscation and extraction. 
 
-<u>First EXE file</u><br>
-	1. Load encrypted PE from resources<br>
-	2. Decrypt<br>
-	3. Execute<br>
-
-<u>Second EXE file - Actual trojan</u><br>
+Enjoy!
