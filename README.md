@@ -1,4 +1,3 @@
 # Deofucate VBScript Trojan
-In 2015 I found a VBScript virus in a known website. Because lots of people could have been in a high risk and there was just one anti-maleware (before I started the reaserch) which alerts from this kind of virus I decided to reverse it and publish what it does.
-
-Enjoy!
+Deofuscated VBScript virus I found in 2015 in a famous website. In this repo I disclosured this virus for the first time and publish what it does.
+It was a potential high risk for many people and there was only single anti-virus which alerted from it.
